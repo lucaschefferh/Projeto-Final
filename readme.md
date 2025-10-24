@@ -26,12 +26,17 @@ O trabalho foi desenvolvido como parte do **projeto final do LAMIA**, integrando
 git clone https://github.com/SEU_USUARIO/Projeto-Final.git
 cd Projeto-Final
 2️⃣ (Opcional) Crie um ambiente virtual
+Linux/macOS
+
 bash
 Copiar código
 python -m venv venv
-# Ativar no Linux
 source venv/bin/activate
-# Ativar no Windows
+Windows
+
+bash
+Copiar código
+python -m venv venv
 venv\Scripts\activate
 3️⃣ Instale as dependências
 bash
@@ -42,12 +47,12 @@ pip install -r requirements.txt
 4️⃣ Execute os notebooks
 Abra no Jupyter Notebook ou Google Colab:
 
-modelo_cnn.ipynb → Treinamento e avaliação do modelo customizado.
+modelo_cnn.ipynb → Treinamento e avaliação do modelo customizado
 
-Yolo.ipynb → Treinamento e fine-tuning do YOLOv8n-cls.
+Yolo.ipynb → Treinamento e fine-tuning do YOLOv8n-cls
 
 🗂️ Estrutura do Projeto
-bash
+text
 Copiar código
 📂 Projeto-Final/
 │
@@ -98,20 +103,20 @@ F1-score médio: 0,80
 
 Bom desempenho em Cataract e Retinopathy
 
-Vantagem: interpretável e ajustável.
+Vantagem: interpretável e ajustável
 
-Desvantagem: tempo de treino maior e sensível à memória.
+Desvantagem: tempo de treino maior e sensível à memória
 
 🟣 YOLOv8n-cls
 Acurácia Top-1: 93,4%
 
 Acurácia Top-5: 100%
 
-Treinamento rápido e leve (~18 minutos).
+Treinamento rápido e leve (~18 minutos)
 
-Vantagem: alta generalização, estabilidade e eficiência.
+Vantagem: alta generalização, estabilidade e eficiência
 
-Desvantagem: menor interpretabilidade clínica.
+Desvantagem: menor interpretabilidade clínica
 
 🧩 Comparativo de Abordagens
 Aspecto	YOLOv8n-cls (Pré-treinado)	CNN Customizada (do zero)
@@ -139,7 +144,6 @@ Permitem explorar os efeitos de cada camada e técnica de regularização, sendo
 YOLOv8 → desempenho e eficiência.
 
 CNN própria → controle e interpretabilidade.
-
 As duas abordagens são complementares e contribuem para um entendimento mais profundo de como redes neurais podem ser aplicadas em contextos médicos.
 
 📄 Documentação
@@ -154,13 +158,28 @@ Para instalar, execute:
 bash
 Copiar código
 pip install -r requirements.txt
-
+Conteúdo do requirements.txt
+txt
+Copiar código
+tensorflow==2.17.0
+tensorflow-addons==0.23.0
+ultralytics==8.3.204
+numpy==1.26.4
+pandas==2.2.2
+matplotlib==3.9.2
+seaborn==0.13.2
+scikit-learn==1.5.2
+opencv-python==4.10.0.84
+Pillow==10.4.0
+tqdm==4.66.5
+jupyter==1.1.1
+notebook==7.2.2
+torch==2.8.0
+torchvision==0.19.0
 👨‍💻 Autor
-
 Lucas Scheffer
 Estudante de Ciência da Computação — UTFPR
 
 📧 E-mail: lshundsdorfer@gmail.com
-
-🔗 LinkedIn: https://www.linkedin.com/in/lucas-scheffer-344a36325/
-
+🔗 LinkedIn: linkedin.com/in/lucas-scheffer-344a36325
+💻 GitHub: github.com/lucaschefferh
