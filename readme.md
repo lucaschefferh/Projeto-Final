@@ -1,176 +1,134 @@
-Classificação de Doenças Oculares com CNN Customizada e YOLOv8
+# 🧠 Projeto Final — Classificação de Doenças Oculares com CNN Customizada e YOLOv8  
 
-Este projeto desenvolve e compara dois modelos de visão computacional para classificação de doenças oculares em imagens clínicas: um modelo CNN criado do zero e um modelo pré-treinado (YOLOv8) ajustado via fine-tuning.
+Este projeto foi desenvolvido como parte do **projeto final do LAMIA (Laboratório de Machine Learning para Indústria)**, com o objetivo de aplicar técnicas de **visão computacional** para a **classificação de doenças oculares** a partir de imagens clínicas de fundo de olho.  
 
-Projeto final do LAMIA (UTFPR), cobrindo CNNs, transfer learning e avaliação de desempenho.
+O foco principal foi **desenvolver e comparar dois modelos de aprendizado profundo** — um **modelo customizado do zero (CNN própria)** e um **modelo pré-treinado YOLOv8n-cls**, avaliando seus desempenhos, limitações e aplicabilidades em contextos clínicos.  
 
-Tecnologias Utilizadas
+---
 
-Python 3.10+
+## 📑 Sumário  
+- [Introdução](#introdução)  
+- [Contexto](#contexto)  
+- [Objetivos do Projeto](#objetivos-do-projeto)  
+- [Base de Dados](#base-de-dados)  
+- [Modelos Implementados](#modelos-implementados)  
+- [Resultados](#resultados)  
+- [Conclusões](#conclusões)  
 
-TensorFlow / Keras
+---
 
-Ultralytics YOLOv8
+## Introdução  
 
-NumPy / Pandas / scikit-learn
+Doenças oculares como **catarata, glaucoma e retinopatia diabética** estão entre as principais causas de cegueira evitável no mundo.  
+A detecção precoce é essencial para permitir o tratamento adequado e reduzir o impacto visual permanente.  
 
-Matplotlib / Seaborn
+Com o avanço das técnicas de **Inteligência Artificial** e **visão computacional**, tornou-se possível desenvolver modelos capazes de analisar imagens de fundo de olho e realizar diagnósticos automáticos com alta precisão.  
 
-Jupyter Notebook / Google Colab
+Este projeto explora essa abordagem, utilizando duas estratégias complementares:  
+1. A criação de uma **rede neural convolucional (CNN)** desenvolvida do zero.  
+2. A utilização do **modelo YOLOv8n-cls** (Ultralytics), ajustado via *fine-tuning*.  
 
-CUDA 12.8 + cuDNN (GPU NVIDIA)
+---
 
-Instalação e Execução
-1) Clonar o repositório
-git clone https://github.com/lucaschefferh/Projeto-Final.git
-cd Projeto-Final
+## Contexto  
 
-2) (Opcional) Criar ambiente virtual
+A classificação automática de doenças oculares é um desafio técnico e científico, pois envolve imagens médicas complexas e sensíveis a variações sutis de textura e cor.  
+Nesse contexto, **modelos pré-treinados** são vantajosos por já possuírem conhecimento visual amplo, enquanto **modelos customizados** permitem maior controle e interpretabilidade — especialmente relevantes em aplicações clínicas.  
 
-Linux/macOS:
+O objetivo foi compreender **em quais cenários cada abordagem é mais apropriada** e como diferentes técnicas de treinamento, regularização e otimização afetam o desempenho final.  
 
-python -m venv venv
-source venv/bin/activate
+---
 
+## Objetivos do Projeto  
 
-Windows (PowerShell):
+- Aplicar **técnicas de pré-processamento e normalização** das imagens clínicas.  
+- Construir um **modelo CNN customizado** para classificação multiclasse (4 categorias).  
+- Aplicar o **YOLOv8n-cls** em modo de **fine-tuning**, avaliando desempenho e eficiência.  
+- Comparar os modelos com base em métricas clássicas de classificação (acurácia, recall, f1-score).  
+- Discutir **quando utilizar um modelo pré-treinado** e **quando desenvolver um modelo próprio**.  
 
-python -m venv venv
-venv\Scripts\Activate.ps1
+---
 
-3) Instalar dependências
+## Base de Dados  
+
+Foi utilizada uma base clínica de imagens de fundo de olho, contendo quatro classes principais:  
+
+- **Cataract**  
+- **Diabetic Retinopathy**  
+- **Glaucoma**  
+- **Normal**  
+
+As imagens foram pré-processadas e redimensionadas para **224 × 224 pixels**, com normalização dos valores de pixel entre 0 e 1.  
+A divisão dos dados seguiu proporções de **80% para treino** e **20% para validação** no modelo customizado, e **90%/10%** para treino e teste no YOLOv8n-cls.  
+
+---
+
+## Modelos Implementados  
+
+### 🟪 CNN Customizada  
+
+- Arquitetura construída **do zero**, composta por blocos convolucionais com *Batch Normalization* e *Spatial Dropout*.  
+- *Pooling 2D* entre blocos para redução progressiva de dimensionalidade.  
+- Camadas densas finais com *Global Average Pooling* e *Dropout*.  
+- **Data augmentation leve**, com rotações, zooms e ajustes de brilho e contraste, controlados para preservar as características clínicas.  
+- Otimização com **AdamW** e agendamento de *learning rate* via **Cosine Decay Restarts**.  
+- Treinamento com **80 épocas** e monitoramento de *early stopping* para evitar sobreajuste.  
+
+### 🟩 YOLOv8n-cls  
+
+- Modelo pré-treinado da **Ultralytics**, baseado em arquitetura **anchor-free**.  
+- Treinamento com **100 épocas** e *batch size* de 16.  
+- *Data augmentation* controlado (*RandAugment*) para robustez visual.  
+- Otimizador **AdamW** com *warmup* de 3 épocas e **Automatic Mixed Precision (AMP)**, acelerando o processo em GPU.  
+- Divisão de dados 90% treino e 10% teste.  
+
+---
+
+## Resultados  
+
+### 🟦 CNN Customizada  
+
+- **Acurácia de validação:** 80,2%  
+- **F1-score médio:** 0,80  
+- **Melhor classe:** *Diabetic Retinopathy* (F1 = 0,87)  
+- **Pior classe:** *Glaucoma* (F1 = 0,72)  
+
+### 🟣 YOLOv8n-cls  
+
+- **Acurácia Top-1:** 93,4%  
+- **Acurácia Top-5:** 100%  
+- **Melhor classe:** *Normal* (~0,95+)  
+- Alta estabilidade e baixo consumo de GPU.  
+
+---
+
+## Conclusões  
+
+A análise comparativa entre os dois modelos mostrou que cada abordagem tem **vantagens e limitações** claras:  
+
+- **YOLOv8n-cls (pré-treinado):**  
+  - Excelente desempenho com baixo custo computacional.  
+  - Ideal para aplicações rápidas e datasets reduzidos.  
+  - Menor interpretabilidade, por se tratar de um modelo fechado e abstrato.  
+
+- **CNN Customizada:**  
+  - Permite entender e controlar cada etapa do aprendizado.  
+  - Melhor para pesquisas e estudos acadêmicos que exigem explicabilidade.  
+  - Mais sensível a hiperparâmetros e limitações de hardware.  
+
+Em síntese:  
+- **YOLOv8 → desempenho e eficiência.**  
+- **CNN própria → controle e interpretabilidade.**  
+
+Ambas as abordagens são complementares, e juntas evidenciam como o *deep learning* pode ser aplicado de forma flexível à análise de imagens médicas.  
+
+---
+
+## 🧩 Dependências  
+
+As bibliotecas utilizadas estão listadas no arquivo `requirements.txt`.  
+Para instalação, execute no terminal:  
+
+```bash
 pip install -r requirements.txt
 
-
-Dica: para usar GPU NVIDIA, verifique instalação e compatibilidade de CUDA e cuDNN.
-
-4) Executar notebooks
-
-Abra no Jupyter Notebook ou Google Colab:
-
-modelo_cnn.ipynb — treinamento e avaliação da CNN customizada
-
-Yolo.ipynb — fine-tuning do YOLOv8n-cls
-
-Estrutura do Projeto
-Projeto-Final/
-├─ modelo_cnn.ipynb               # Criação, treino e avaliação da CNN
-├─ Yolo.ipynb                     # Treinamento e fine-tuning do YOLOv8n-cls
-├─ best_model.keras               # Modelo customizado salvo
-├─ runs/classify/train5/          # Resultados do YOLOv8 (pesos, logs, métricas)
-├─ README.md                      # Este arquivo
-├─ requirements.txt               # Dependências
-├─ Relatorio_Final.pdf            # Relatório técnico-acadêmico
-└─ Apresentacao_Final.pdf         # Slides de apresentação
-
-Métodos Utilizados
-CNN Customizada (do zero)
-
-Arquitetura leve com camadas convolucionais, pooling e blocos densos
-
-Batch Normalization e Spatial Dropout para estabilidade e regularização
-
-Data augmentation leve (flip, rotação, brilho, contraste)
-
-Otimizador: AdamW + Cosine Decay Restarts + EarlyStopping
-
-Divisão: 80% treino / 20% validação
-
-80 épocas de treinamento
-
-YOLOv8n-cls (pré-treinado)
-
-Arquitetura anchor-free da Ultralytics ajustada via fine-tuning
-
-Imagens 224×224 normalizadas
-
-Data augmentation leve (RandAugment: flips, rotações, variação de cor)
-
-Otimizador: AdamW + warmup + AMP
-
-Divisão: 90% treino / 10% teste
-
-100 épocas de treinamento
-
-Resultados
-CNN Customizada
-
-Acurácia de validação: 80,2%
-
-F1-score médio: 0,80
-
-Bom desempenho em Cataract e Retinopathy
-
-Vantagens: interpretável e ajustável
-
-Limitações: treino mais lento e sensível à memória
-
-YOLOv8n-cls
-
-Acurácia Top-1: 93,4%
-
-Acurácia Top-5: 100%
-
-Treinamento rápido (~18 min)
-
-Vantagens: generalização, estabilidade e eficiência
-
-Limitações: menor interpretabilidade clínica
-
-Comparativo (Resumo)
-Aspecto	YOLOv8n-cls (pré-treinado)	CNN do zero
-Base	Fine-tuning	Treino completo
-Pré-processamento	224×224, normalização 0–1	Igual ao YOLOv8
-Augmentation	RandAugment leve	Transformações leves
-Regularização	Weight Decay	BatchNorm + Spatial Dropout
-Otimização	AdamW + Warmup + AMP	AdamW + Cosine Decay + ES
-Épocas / Batch	100 / 16	80 / 32
-Acurácia final	93,4%	80,2%
-Interpretabilidade	Menor	Maior
-Conclusões
-
-Modelos pré-treinados (YOLOv8) são ideais quando há poucos dados, pouco tempo e foco em desempenho.
-
-Modelos customizados (CNN do zero) dão mais controle e transparência, úteis para pesquisa e validação em domínios sensíveis.
-
-Em síntese: YOLOv8 prioriza desempenho/eficiência; a CNN prioriza controle/interpretabilidade. As abordagens são complementares.
-
-Documentação
-
-Relatório técnico: Relatorio_Final.pdf
-
-Apresentação de slides: Apresentacao_Final.pdf
-
-Dependências
-
-Instalação:
-
-pip install -r requirements.txt
-
-
-Conteúdo de requirements.txt:
-
-tensorflow==2.17.0
-tensorflow-addons==0.23.0
-ultralytics==8.3.204
-numpy==1.26.4
-pandas==2.2.2
-matplotlib==3.9.2
-seaborn==0.13.2
-scikit-learn==1.5.2
-opencv-python==4.10.0.84
-Pillow==10.4.0
-tqdm==4.66.5
-jupyter==1.1.1
-notebook==7.2.2
-torch==2.8.0
-torchvision==0.19.0
-
-Autor
-
-Lucas Scheffer — Estudante de Ciência da Computação (UTFPR)
-E-mail: lshundsdorfer@gmail.com
-
-LinkedIn: https://linkedin.com/in/lucas-scheffer-344a36325
-
-GitHub: https://github.com/lucaschefferh
