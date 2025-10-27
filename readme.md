@@ -13,7 +13,7 @@ O foco principal foi **desenvolver e comparar dois modelos de aprendizado profun
 - [Base de Dados](#base-de-dados)  
 - [Modelos Implementados](#modelos-implementados)  
 - [Resultados](#resultados)  
-- [Conclusões](#conclusões)  
+- [Conclusões](#conclusões)
 
 ---
 
@@ -124,11 +124,4 @@ Ambas as abordagens são complementares, e juntas evidenciam como o *deep learni
 
 ---
 
-## 🧩 Dependências  
-
-As bibliotecas utilizadas estão listadas no arquivo `requirements.txt`.  
-Para instalação, execute no terminal:  
-
-```bash
-pip install -r requirements.txt
 
