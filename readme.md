@@ -59,8 +59,7 @@ Foi utilizada uma base clínica de imagens de fundo de olho, contendo quatro cla
 - **Normal**  
 
 As imagens foram pré-processadas e redimensionadas para **224 × 224 pixels**, com normalização dos valores de pixel entre 0 e 1.  
-A divisão dos dados seguiu proporções de **80% para treino** e **20% para validação** no modelo customizado, e **90%/10%** para treino e teste no YOLOv8n-cls.  
-
+A divisão dos dados seguiu proporções de **70% para treino**, **15% para validação** e **15% para teste** 
 ---
 
 ## Modelos Implementados  
@@ -88,16 +87,17 @@ A divisão dos dados seguiu proporções de **80% para treino** e **20% para val
 
 ### 🟦 CNN Customizada  
 
-- **Acurácia de validação:** 80,2%  
-- **F1-score médio:** 0,80  
-- **Melhor classe:** *Diabetic Retinopathy* (F1 = 0,87)  
-- **Pior classe:** *Glaucoma* (F1 = 0,72)  
+- **Acurácia de validação:** 82%  
+- **Acurácia de teste:** 77%  
+- **F1-score médio:** 0,77  
+- **Melhor classe:** *Diabetic Retinopathy* (F1 = 0,88)  
+- **Pior classe:** *Glaucoma* (F1 = 0,61)  
 
 ### 🟣 YOLOv8n-cls  
 
-- **Acurácia Top-1:** 93,4%  
+- **Acurácia Top-1:** 91,1%  
+- **Acurácia de teste:** 90,1%  
 - **Acurácia Top-5:** 100%  
-- **Melhor classe:** *Normal* (~0,95+)  
 - Alta estabilidade e baixo consumo de GPU.  
 
 ---
