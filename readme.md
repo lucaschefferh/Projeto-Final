@@ -95,10 +95,11 @@ A divisão dos dados seguiu proporções de **70% para treino**, **15% para vali
 
 ### 🟣 YOLOv8n-cls  
 
-- **Acurácia Top-1:** 91,1%  
-- **Acurácia de teste:** 90,1%  
-- **Acurácia Top-5:** 100%  
-- Alta estabilidade e baixo consumo de GPU.  
+- **Acurácia Top-1:** 93,2%  
+- **Acurácia de teste:** 92,9%  
+- **F1-score médio:** 0,928  
+- **Melhor classe:** *Diabetic Retinopathy* (F1 = 0,967)  
+- **Pior classe:** *Glaucoma* (F1 = 0,883)  
 
 ---
 
