@@ -88,10 +88,10 @@ A divisão dos dados seguiu proporções de **70% para treino**, **15% para vali
 ### 🟦 CNN Customizada  
 
 - **Acurácia de validação:** 82%  
-- **Acurácia de teste:** 77%  
-- **F1-score médio:** 0,77  
-- **Melhor classe:** *Diabetic Retinopathy* (F1 = 0,88)  
-- **Pior classe:** *Glaucoma* (F1 = 0,61)  
+- **Acurácia de teste:** 83%  
+- **F1-score médio:** 0,83  
+- **Melhor classe:** *Diabetic Retinopathy* (F1 = 0,92)  
+- **Pior classe:** *Glaucoma* (F1 = 0,73)  
 
 ### 🟣 YOLOv8n-cls  
 
